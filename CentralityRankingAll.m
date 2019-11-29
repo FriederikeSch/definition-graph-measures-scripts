@@ -1,21 +1,28 @@
-%Erstellt ein Ranking aller Knoten anhand der Centralitäts Werte.
+% Builds a Ranking of all nodes according to their centrality scores.
+%
+% In: Centrality, finnallist, summedeueccentricity
+% Out: allsort: a sorted list of all nodes and their ranking score
 
 clearvars;
 
 cd '/Users/User/Documents/Studium/BA/Auswertungsplots/';
 
+%a list of Degree, Closeness, Shortest Path Betweenness and Eigenvector Centrality
 load ('Centrality'); 
 
+% holds Random Walk Betweenness
 load('finallist');
 
+% holds Eccentricity scores
 load('summedupeccentricty');
 
 all=zeros(1,213);
 
-%Inverse nehmen,um Eccentricity als Centralitäts Wert verwenden zu können
+% take inverse to calculate eccentricity as centrality measure 
 for i=1:213
     sumupecc(1,i)=1/sumupecc(1,i);
 end
+
 %Degree
 deg=centlist(1,:);
 %Closeness
@@ -25,11 +32,10 @@ bet=centlist(3,:);
 %Eigenvector
 eig=centlist(5,:);
 
-%sortiert aufsteigend nach Wert
+% sorts ascending to value 
+
 [degsort(2,:),degsort(1,:)]=sort(deg);
 degsort(3,:)=zeros;
-
-
 
 [clossort(2,:),clossort(1,:)]=sort(clos);
 clossort(3,:)=zeros;
@@ -48,8 +54,7 @@ randbetsort(3,:)=zeros;
 [eccsort(2,:),eccsort(1,:)]=sort(sumupecc);
 eccsort(3,:)=zeros;
 
-%erstellt ein Ranking für jeden Knoten. Der Knoten mit dem niederigsten Wert
-%kriegt 1, der nächste 2 usw.
+% creates the node ranking the node with the lowest score get one point the next one two and so on
 
 for i=1:213
     degsort(3,i)=degsort(3,i)+i;
@@ -69,7 +74,7 @@ eign=eigsort(1,:);
 randbetn=randbetsort(1,:);
 eccn=eccsort(1,:);
 
-%sucht für jeden Knoten den Ranking Wert und addiert für die Measures
+% searches for the ranking value in each measure for each node and adds them
 for j=1:213
   hold=degn==j; 
   sum=degsort(3,hold);
@@ -92,7 +97,7 @@ for j=1:213
    all(1,j)=sum;
 end
 
-%erstellt ein Ranking für alle Knoten vom niederigsten zum höchsten
+%builds the ranking by sorting the nodes 
 [allsort(2,:),allsort(1,:)]=sort(all);
 
 %plot(allsort(1,:));
