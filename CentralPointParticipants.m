@@ -1,5 +1,7 @@
 %Berechnet wie oft ein Haus von einem Participant als Central Point
-%ausgewählt wurde.
+%ausgewÃ¤hlt wurde.
+%
+%In : PartList, graph.mat files
 
 clearvars;
 
@@ -32,10 +34,10 @@ for ii = 1:Number
         graphy= graphy.graphy;
         nodes=table2array(graphy.Nodes);
      
-        % die Distanz Matrix für einen Graphen
+        % die Distanz Matrix fÃ¼r einen Graphen
         d=transpose(distances(graphy));
         
-        % die maximal Distanzen für jedes Haus in der Distanz Matrix
+        % die maximal Distanzen fÃ¼r jedes Haus in der Distanz Matrix
         maxdist=max(d);
         
         
